@@ -8,6 +8,7 @@ import javax.sound.sampled.*;
 public class Sound {
     private Clip clip;
 
+    // Play Background Music
     public void playMusic(String filePath) {
         try {
             File musicFile = new File(filePath);
@@ -21,4 +22,6 @@ public class Sound {
             e.printStackTrace();
         }
     }
+
+    // Play Sound Effects
 }

@@ -39,15 +39,17 @@ public class Loops implements Runnable {
         gameThread.start();
     }
 
+    // Start loop
     @Override
     public void run() {
         while (gameThread != null) {
+            // Configure keyboard controls
             if (Input.spacePressed) {
                 Physics.velocityY = -17;
             }
             Physics.velocityY += Physics.gravity;
             Cat.catY += Physics.velocityY;
-
+            // Make sure cat doesn't go under the screen
             if (Cat.catY + Cat.catHeight > Screen.screenHeight) {
                 Cat.catY = Screen.screenHeight - Cat.catHeight;
                 Physics.velocityY = 0;
@@ -55,6 +57,7 @@ public class Loops implements Runnable {
                 Cat.catY = 0;
                 Physics.velocityY = 0;
             }
+            // Randomly generate trees
             double treeChance = Math.random();
             if (treeChance > .99) {
                 int treeHeight = 70;
@@ -66,6 +69,7 @@ public class Loops implements Runnable {
                     trees.remove(0);
                 }
             }
+            // Set up tree movement and collision
             for (int i = 0; i < trees.size(); i++) {
                 Tree tree = trees.get(i);
                 tree.treeX += Physics.velocityX;
@@ -78,9 +82,9 @@ public class Loops implements Runnable {
                     }
                 }
             }
-
+            // Update the screen
             screen.repaint();
-
+            // Set up FPS
             try {
                 Thread.sleep(16);
             } catch (InterruptedException e) {
